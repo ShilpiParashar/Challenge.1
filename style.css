@@ -1,0 +1,254 @@
+* {
+  padding: 0;
+  margin: 0;
+  /*used for sizing the box and get rid of defaultbox */
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  border-top: 5px solid #1098ad;
+  /* position: relative; */
+}
+h1,
+h2,
+h3,
+h4,
+li,
+p,
+a,
+footer {
+  font-family: sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  color: #1098ad;
+}
+h1 {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-style: italic;
+  padding-top: 30px;
+  float: left;
+  padding-bottom: 20px;
+}
+h2 {
+  font-size: 24px;
+  padding-top: 10px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+h4 {
+  font-size: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+ul,
+ol {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 50px;
+}
+li {
+  font-size: 16px;
+  color: #444;
+  margin: 10px;
+}
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #444;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+a {
+  font-size: 16px;
+}
+
+/* header p { 
+  font-style: italic;
+}*/
+/* footer { 
+  font-size: 16px;
+ } */
+#copyright {
+  font-size: 14;
+}
+#author {
+  font-style: italic;
+}
+.related-author {
+  font-size: 16;
+  font-weight: bold;
+}
+/*ul{
+  list-style: none;
+}*/
+.removebullet {
+  list-style: none;
+  margin-left: 0px;
+}
+aside {
+  border-top: 5px solid #1098ad;
+  border-bottom: 5px solid #1098ad;
+  background-color: #f7f7f7;
+  /* width: 500px; */
+  /* height: 500px; */
+  padding: 10px 20px;
+}
+header {
+  background-color: #f7f7f7;
+}
+
+body {
+  position: relative;
+  /* background-color: #d1a5a5; */
+}
+/* 
+li:first-child {
+  font-weight: bold;
+}
+li:last-child {
+  font-style: italic;
+}
+li:nth-child(even) {
+  color: blue;
+}
+article p:last-child {
+  color: red;
+}
+ */
+/* styling hyperlinks */
+a:link {
+  color: #1098ad;
+  text-decoration: none;
+}
+a:visited {
+  color: #1098ad;
+}
+a:hover {
+  color: coral;
+  font-weight: bold;
+  text-decoration: underline coral;
+}
+a:active {
+  background-color: black;
+  font-style: italic;
+}
+nav {
+  font-size: 18px;
+  float: right;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  display: inline-block; /*link element are centered by defining it in the parent element just like done here*/
+}
+nav a:link {
+  /* margin-top: 20px; 
+  /* margin-bottom: 20px;/*nothing will change */
+  /* background-color: orange; */
+  margin-right: 10px;
+  margin-top: 10px;
+  /* display: inline-block; */
+}
+nav a:link:last-child {
+  margin-right: 0;
+}
+/* LVHA */
+/* Resolving conflicts between selectors */
+#copyright {
+  color: black;
+}
+.copyright {
+  color: darkred;
+}
+.text {
+  color: deeppink;
+}
+footer p {
+  color: gold; /* !important; keyword will make this appear unfollowing priority*/
+}
+.post {
+  width: 625px;
+  height: auto;
+}
+.laura {
+  width: 8%;
+  height: auto;
+}
+/* centering the page */
+.container {
+  width: 1100px;
+  /*margin-left: auto;
+  margin-right: auto; */
+  margin: 0 auto; /*margin at top bottom is 0 and at left right it is auto.  */
+  position: relative;
+}
+button {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+
+  position: absolute; /* this keeps the position changes of the button only on the view port */
+  right: 80px;
+  bottom: 10px; /* in parent element i.e body we have to define position to be relative */
+  float: right;
+}
+/* Pseudo elements */
+h1::first-letter {
+  font-style: normal;
+}
+h3 + p::first-line {
+  /* color: red; */
+}
+
+h2::after {
+  content: "TOP";
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  background-color: yellow;
+  padding: 5px 10px;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+/* Floats */
+.author {
+  float: left;
+  margin-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.laura {
+  float: left;
+}
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+/* LAYOUTS */
+article {
+  position: relative;
+  width: 785px;
+  float: left;
+  clear: left;
+}
+aside {
+  width: 300px;
+  float: right;
+  margin-top: 30px;
+}
+footer {
+  clear: both;
+  padding-top: 20px;
+  width: 800px;
+}
