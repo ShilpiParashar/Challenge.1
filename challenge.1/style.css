@@ -30,13 +30,12 @@ h1 {
   text-transform: uppercase;
   font-style: italic;
   padding-top: 30px;
-  float: left;
   padding-bottom: 20px;
 }
 h2 {
   font-size: 24px;
-  padding-top: 10px;
-  margin-top: 30px;
+  /* padding-top: 10px; */
+  /* margin-top: 30px; */
   margin-bottom: 20px;
 }
 h3 {
@@ -85,10 +84,10 @@ a {
 #author {
   font-style: italic;
 }
-.related-author {
+/* .related-author {
   font-size: 16;
   font-weight: bold;
-}
+} */
 /*ul{
   list-style: none;
 }*/
@@ -145,11 +144,10 @@ a:active {
 }
 nav {
   font-size: 18px;
-  float: right;
   padding-bottom: 20px;
   padding-top: 30px;
-  display: inline-block; /*link element are centered by defining it in the parent element just like done here*/
-}
+  display: inline-block; link element are centered by defining it in the parent element just like done here
+ }
 nav a:link {
   /* margin-top: 20px; 
   /* margin-bottom: 20px;/*nothing will change */
@@ -176,7 +174,7 @@ footer p {
   color: gold; /* !important; keyword will make this appear unfollowing priority*/
 }
 .post {
-  width: 625px;
+  width: 100%;
   height: auto;
 }
 .laura {
@@ -198,16 +196,15 @@ button {
 
   position: absolute; /* this keeps the position changes of the button only on the view port */
   right: 80px;
-  bottom: 10px; /* in parent element i.e body we have to define position to be relative */
-  float: right;
+  bottom: 10px; /*in parent element i.e body we have to define position to be relative*/
 }
 /* Pseudo elements */
-h1::first-letter {
+/* h1::first-letter {
   font-style: normal;
-}
-h3 + p::first-line {
-  /* color: red; */
-}
+} */
+/* h3 + p::first-line {
+  color: red;
+} */
 
 h2::after {
   content: "TOP";
@@ -217,10 +214,20 @@ h2::after {
   background-color: yellow;
   padding: 5px 10px;
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: 380px;
+  top: 100px;
 }
 /* Floats */
+/*
+h1 {
+  float: left; 
+}
+nav {
+  float: right;
+}
+button{
+  float: right;
+}
 .author {
   float: left;
   margin-left: 20px;
@@ -234,9 +241,10 @@ h2::after {
   clear: both;
   content: "";
   display: block;
-}
+} */
 /* LAYOUTS */
-article {
+
+/* article {
   position: relative;
   width: 785px;
   float: left;
@@ -250,5 +258,55 @@ aside {
 footer {
   clear: both;
   padding-top: 20px;
-  width: 800px;
+  width: 800px; 
+} 
+*/
+
+/* FLEXBOX */
+.clearfix {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.author {
+  margin-left:10px;
+}
+.related-post {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.related-author {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 15px;
+}
+.related-link:link {
+ font-weight: bold;
+ font-style: normal;
+ font-size: 17px;
+ display: block;
+ margin-bottom: 0px;
+}
+aside{
+  /* width: 300px; */
+  flex: 0 0 300px;
+}
+.important {
+  display:flex;
+  gap:75px;
+  margin-bottom: 30px;
+  margin-top:30px;
+  align-items: flex-start;
+}
+.last{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
