@@ -294,9 +294,9 @@ footer {
  display: block;
  margin-bottom: 0px;
 }
+/*
 aside{
-  /* width: 300px; */
-  flex: 0 0 300px;
+   flex: 0 0 300px;
 }
 .important {
   display:flex;
@@ -304,9 +304,24 @@ aside{
   margin-bottom: 30px;
   margin-top:30px;
   align-items: flex-start;
-}
+}*/
 .last{
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+/*USING GRID*/
+ .container{
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap:45px;
+} 
+header{
+  grid-column: 1/span 2;
+}
+aside{
+  grid-column: 2/3;
+  grid-row: 2/3;
+  align-self: start;
+}
+

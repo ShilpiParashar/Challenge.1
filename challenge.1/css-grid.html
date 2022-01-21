@@ -34,16 +34,37 @@
 
       .container--1 {
         /* STARTER */
+        display: none;
         font-family: sans-serif;
         background-color: #ddd;
-        font-size: 40px;
+        font-size: 30px;
         margin: 40px;
-
         /* CSS GRID */
+        /* display: grid; */
+        /* grid-template-columns: 200px 200px 100px 100px;  */
+        /* grid-template-columns: 1fr 1fr 1fr 1fr; fr (fraction) makes the grid item to expand thoroughly in equal space */
+        grid-template-columns: repeat(4, 1fr);
+        /* grid-template-rows: 200px 200px; */
+        grid-template-rows: 1fr 1fr;
+        /* height: 500px; */
+        /* gap: 20px; */
+        column-gap: 30px;
+        row-gap: 30px;
       }
-
+      .el--8 {
+        grid-column: 2/3; /*second column third row*/
+        grid-row: 1/2; /*second column first row*/
+      }
+      .el--2 {
+        /* grid-column: 1 / span 3; or 1/4 */
+        grid-column: 1/2;
+        /* grid-column: 1/-1; from beginning to all the way end */
+        grid-row: 2/3;
+      }
       .container--2 {
         /* STARTER */
+        /* display: none; */
+
         font-family: sans-serif;
         background-color: black;
         font-size: 40px;
@@ -53,6 +74,20 @@
         height: 600px;
 
         /* CSS GRID */
+        display: grid;
+        grid-template-columns: 125px 200px 125px;
+        grid-template-rows: 250px 100px;
+        gap: 50px;
+        /*Aligning tracks inside container: distribute empty space*/
+        justify-content: center;
+        align-content: center;
+        /* Aligning items INSIDE cells: moving items around inside cells*/
+        align-items: center;
+        justify-items: center; /*or stretch */
+      }
+      .el--3 {
+        align-self: center;
+        justify-self: center;
       }
     </style>
   </head>
