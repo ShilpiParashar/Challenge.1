@@ -1,0 +1,306 @@
+/*WHEN THE BROWSER FONT SIZE IS MEDIUM THEN IT WORKS PERFECTLY*/
+
+/* rem and em do not depend on html font-size in media queries!
+Instead, 1rem = 1em= 16px*/
+
+/*****************************/
+/*BELOW 1344PX i.e 84*16(smaller desktops) */
+/*****************************/
+/*1350/16=84*/
+/* @media (max-width: 84em) {
+  .primary-heading {
+    font-size: 4.2rem;
+  }
+  .hero-description {
+    font-size: 1.6rem;
+  }
+   .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  } 
+} */
+/*****************************/
+/*BELOW 1200PX i.e 75*16(Landscape Tablets) */
+/*****************************/
+/*1200/16=75*/
+/*9px/16px = 56.25%*/
+/* @media (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+  .primary-heading {
+    font-size: 4.8rem;
+  }
+  .secondary-heading {
+    font-size: 3.2rem;
+  }
+  .tertiary-heading {
+    font-size: 2.8rem;
+  }
+  .hero-description {
+    font-size: 2rem;
+  }
+  .description {
+    padding: 0.8rem;
+    font-size: 1.8rem;
+  }
+  .subheading,
+  .heading {
+    font-size: 1.8rem;
+  } */
+/****************************/
+/*BELOW 944px (Tablets)*/
+/***************************/
+/*8px/16px =0.5 =50%*/
+@media (max-width: 59em) {
+  html {
+    font-size: 50%;
+  }
+  .primary-heading {
+    font-size: 4.8rem;
+  }
+  .secondary-heading {
+    font-size: 3.2rem;
+  }
+  .tertiary-heading {
+    font-size: 2.8rem;
+  }
+  .hero-description {
+    font-size: 2rem;
+  }
+  .description {
+    padding: 0.8rem;
+    font-size: 1.8rem;
+  }
+  .subheading,
+  .heading {
+    font-size: 1.8rem;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 2.2rem;
+    gap: 4.8rem;
+  }
+  .hero-text-box,
+  .hero-image-box {
+    text-align: center;
+  }
+  .delivered-imgs img {
+    height: 4.9rem;
+    width: 4.9rem;
+  }
+  .hero-img {
+    width: 90%;
+  }
+  .delivered-meals {
+    justify-content: center;
+    margin-top: 3.2rem;
+  }
+  .logo1 {
+    height: 2.1rem;
+  }
+  .step-number {
+    font-size: 7.4rem;
+  }
+  .meal-content {
+    padding: 2.4rem 3.2rem 3.2rem 3.2rem;
+  }
+  .testimonial-section {
+    grid-template-columns: 1fr;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(6, 1fr);
+    padding-left: 1rem;
+  }
+  .cta-form {
+    grid-template-columns: 1fr;
+  }
+  .footer-item {
+    font-size: 1.8rem;
+  }
+  /*MOBILE NAVIGATION*/
+  .btn-mobile-nav {
+    display: block;
+    z-index: 9999;
+  }
+  .main-nav {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    -webkit-backdrop-filter: blur(5px); /*for safari*/
+    backdrop-filter: blur(10px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transform: translateX(100%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease-in-out;
+
+    /*Hide navigation*/
+    /*Allows NO transitions at all*/
+    /*display: none; */
+
+    /*1) Hide it visually*/
+    opacity: 0;
+    /*2) Make it unaccessible to mouse and keyboard*/
+    pointer-events: none;
+    /*3) Hide it from screen readers*/
+    visibility: hidden;
+  }
+  .nav-open .main-nav {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  .nav-open .icon-mobile-nav[name="close-outline"] {
+    display: block;
+  }
+  .nav-open .icon-mobile-nav[name="menu-outline"] {
+    display: none;
+  }
+  .main-nav-list {
+    flex-direction: column;
+    gap: 4.8rem;
+  }
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 3rem;
+  }
+}
+/***************************/
+/*BELOW 704 (Smaller Tablets)*/
+/***************************/
+@media (max-width: 44em) {
+  .feature-part {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid--3-cols {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3.2rem;
+  }
+  .text-box {
+    margin-bottom: 4.8rem;
+  }
+  .grid .extra-box,
+  .meals-list .description {
+    grid-column: span 2;
+    text-align: center;
+    justify-content: center;
+  }
+  .footer-section {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3.2rem;
+  }
+  .nav-grid {
+    grid-row: 1;
+    grid-column: span 2;
+  }
+  .footer-grid {
+    grid-column: span 3;
+  }
+}
+/*************************/
+/*BELOW 544PX (PHONES)*/
+/*************************/
+@media (max-width: 34em) {
+  .grid--2-cols {
+    grid-template-columns: 1fr;
+  }
+  .step-pic:nth-child(2) {
+    /*nth child is of the parent element of the class */
+    grid-row: 1;
+  }
+  .step-pic:nth-child(6) {
+    grid-row: 5;
+  }
+  .grid--3-cols {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .text-box:nth-child(2) {
+    grid-row: 2;
+  }
+  .testimonial-grid {
+    padding: 5.8rem;
+  }
+  .price-container {
+    grid-template-columns: 1fr;
+  }
+  .cta-container {
+    grid-template-columns: 1fr;
+  }
+  .eating-girl {
+    height: 32rem;
+    grid-row: 1;
+  }
+  .logo1 {
+    height: 1.8rem;
+  }
+  .flex {
+    padding: 1.2rem;
+  }
+  .feature-in,
+  .section-how,
+  .meals-section,
+  .testimonial-section,
+  .pricing-section,
+  .feature-part,
+  .call-to-action-section,
+  .footer-section {
+    padding: 3.4rem 3.2rem 3.4rem 3.2rem;
+  }
+}
+/**************************/
+/*Fixing flexbox gap property missing in some Safari versions*/
+/***************************/
+.no-flexbox-gap .main-nav-list li:not(:last-child) {
+  margin-right: 4.8rem;
+}
+
+.no-flexbox-gap .list-item:not(:last-child) {
+  margin-bottom: 1.6rem;
+}
+
+.no-flexbox-gap .list-icon:not(:last-child) {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .delivered-faces {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .meal-attribute:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.no-flexbox-gap .meal-icon {
+  margin-right: 1.6rem;
+}
+
+.no-flexbox-gap .footer-row div:not(:last-child) {
+  margin-right: 6.4rem;
+}
+
+.no-flexbox-gap .social-links li:not(:last-child) {
+  margin-right: 2.4rem;
+}
+
+.no-flexbox-gap .footer-nav li:not(:last-child) {
+  margin-bottom: 2.4rem;
+}
+
+@media (max-width: 75em) {
+  .no-flexbox-gap .main-nav-list li:not(:last-child) {
+    margin-right: 3.2rem;
+  }
+}
+
+@media (max-width: 59em) {
+  .no-flexbox-gap .main-nav-list li:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 4.8rem;
+  }
+}
