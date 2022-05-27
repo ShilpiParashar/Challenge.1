@@ -1,9 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Fragment } from "react";
 import { Prompt } from "react-router-dom";
 import Card from "../UI/Card";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import classes from "./BookForm.module.css";
+
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
 const validEmailRegex = RegExp(
   // eslint-disable-next-line no-useless-escape
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -19,13 +23,13 @@ const BookForm = (props) => {
   //                 type="file" id="input"
   //                 // onChange={ e => setFiles(e.target.value)}
   //                 onChange={() => setFiles(inputRef.current.files[0])}
-  //                 ref={inputRef}
   //             />
   //         </div>
   //     )
   // }
   // const [image, setImage] = useState(null);
-
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
   const [state, setState] = useState({
     enteredAuthor: "",
     enteredText: "",
@@ -35,8 +39,9 @@ const BookForm = (props) => {
     enteredPhoneNumber: "",
     enteredEmail: "",
     enteredDate: "",
-    enteredImage: "",
-
+    enteredImage: null,
+    imageUrl: "",
+    imageUploadProgress: 0,
     validForm: false,
     invalid: {
       enteredAuthor: "",
@@ -46,8 +51,7 @@ const BookForm = (props) => {
       enteredSeller: "",
       enteredPhoneNumber: "",
       enteredEmail: "",
-      enteredDate: "",
-      enteredImage: ""
+      enteredDate: ""
     },
 
     errors: {
@@ -58,8 +62,7 @@ const BookForm = (props) => {
       enteredSeller: "",
       enteredPhoneNumber: "",
       enteredEmail: "",
-      enteredDate: "",
-      enteredImage: ""
+      enteredDate: ""
     },
 
     isSuccessSubmit: false,
@@ -68,40 +71,10 @@ const BookForm = (props) => {
   });
   const [isEntering, setIsEntering] = useState(false);
 
-  const authorInputRef = useRef();
-  const textInputRef = useRef();
-  const priceInputRef = useRef();
-  const ratingInputRef = useRef();
-  const sellerInputRef = useRef();
-  const phoneNumberInputRef = useRef();
-  const emailInputRef = useRef();
-  const dateInputRef = useRef();
-  const imageInputRef = useRef();
-
   function submitFormHandler(event) {
     event.preventDefault();
-    // const enteredAuthor = authorInputRef.current.value;
-    // const enteredText = textInputRef.current.value;
-    // const enteredPrice = priceInputRef.current.value;
-    // const enteredRating = ratingInputRef.current.value;
-    // const enteredSeller = sellerInputRef.current.value;
-    // const enteredPhoneNumber = phoneNumberInputRef.current.value;
-    // const enteredEmail = emailInputRef.current.value;
-    // const enteredDate = dateInputRef.current.value;
-    // const enteredImage = imageInputRef.current.value;
-    // // optional: validate here
-    // props.onAddBook({
-    //   author: enteredAuthor,
-    //   text: enteredText,
-    //   price: enteredPrice,
-    //   rating: enteredRating,
-    //   seller: enteredSeller,
-    //   phoneNumber: enteredPhoneNumber,
-    //   email: enteredEmail,
-    //   date: enteredDate,
-    //   image: enteredImage
-    // });
-    handleSave();
+    uploadFile();
+    // handleSave();
   }
 
   const finishEnteringHandler = () => {
@@ -111,6 +84,17 @@ const BookForm = (props) => {
   const formFocusedHandler = () => {
     setIsEntering(true);
   };
+
+  const uploadFile = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        handleSave(url);
+      });
+    });
+  };
+
   const onChangeHandler = (event) => {
     event && event.preventDefault();
     const { name, value } = event.target;
@@ -189,14 +173,6 @@ const BookForm = (props) => {
         }
 
         break;
-      case "enteredImage":
-        if (value.length <= 0) {
-          errors.enteredImage = state.this_field_is_required;
-          invalid.enteredImage = true;
-        } else {
-          errors.enteredImage = "";
-          invalid.enteredImage = false;
-        }
 
         break;
 
@@ -213,69 +189,58 @@ const BookForm = (props) => {
     });
     let invalid = { ...state.invalid };
     let stateErrors = { ...state.errors };
-    if (state.enteredAuthor == "") {
-      invalid.enteredAuthor = true;
-      stateErrors.enteredAuthor = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredText == "") {
-      invalid.enteredText = true;
-      stateErrors.enteredText = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredPrice == "") {
-      invalid.enteredPrice = true;
-      stateErrors.enteredPrice = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredRating == "") {
-      invalid.enteredRating = true;
-      stateErrors.enteredRating = state.this_field_is_required;
-      valid = false;
-    }
-
-    if (state.enteredSeller == "") {
-      invalid.enteredSeller = true;
-      stateErrors.enteredSeller = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredPhoneNumber == "") {
-      invalid.enteredPhoneNumber = true;
-      stateErrors.enteredPhoneNumber = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredEmail == "") {
-      invalid.enteredEmail = true;
-      stateErrors.enteredEmail = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredDate == "") {
-      invalid.enteredDate = true;
-      stateErrors.enteredDate = state.this_field_is_required;
-      valid = false;
-    }
-    if (state.enteredImage == "") {
-      invalid.enteredImage = true;
-      stateErrors.enteredImage = state.this_field_is_required;
-      valid = false;
-    }
-
-    // if (!state.startDate) {
-    //   invalid.startDate = true;
-    //   stateErrors.startDate = 'startDate (Required)';
+    // if (state.enteredAuthor == "") {
+    //   invalid.enteredAuthor = true;
+    //   stateErrors.enteredAuthor = state.this_field_is_required;
     //   valid = false;
     // }
-    // if (!state.endDate) {
-    //   invalid.endDate = true;
-    //   stateErrors.endDate = 'endDate (Required)';
+    // if (state.enteredText == "") {
+    //   invalid.enteredText = true;
+    //   stateErrors.enteredText = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredPrice == "") {
+    //   invalid.enteredPrice = true;
+    //   stateErrors.enteredPrice = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredRating == "") {
+    //   invalid.enteredRating = true;
+    //   stateErrors.enteredRating = state.this_field_is_required;
+    //   valid = false;
+    // }
+
+    // if (state.enteredSeller == "") {
+    //   invalid.enteredSeller = true;
+    //   stateErrors.enteredSeller = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredPhoneNumber == "") {
+    //   invalid.enteredPhoneNumber = true;
+    //   stateErrors.enteredPhoneNumber = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredEmail == "") {
+    //   invalid.enteredEmail = true;
+    //   stateErrors.enteredEmail = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredDate == "") {
+    //   invalid.enteredDate = true;
+    //   stateErrors.enteredDate = state.this_field_is_required;
+    //   valid = false;
+    // }
+    // if (state.enteredImage == "") {
+    //   invalid.enteredImage = true;
+    //   stateErrors.enteredImage = state.this_field_is_required;
     //   valid = false;
     // }
 
     setState({ ...state, invalid, errors: stateErrors });
-    console.log("valid", valid);
+
     return valid;
   };
-  const handleSave = () => {
+  const handleSave = (imageUrlPath) => {
     if (validateForm(state.errors)) {
       const addBookData = {
         author: state.enteredAuthor,
@@ -286,7 +251,7 @@ const BookForm = (props) => {
         phoneNumber: state.enteredPhoneNumber,
         email: state.enteredEmail,
         date: state.enteredDate,
-        image: state.enteredImage
+        image: imageUrlPath
       };
       if (props.onAddBook) {
         props.onAddBook(addBookData);
@@ -303,6 +268,9 @@ const BookForm = (props) => {
         }
       ></Prompt>
       <Card>
+        {imageUrls.map((url) => {
+          return <img src={url} />;
+        })}
         <form
           onFocus={formFocusedHandler}
           className={classes.form}
@@ -322,7 +290,6 @@ const BookForm = (props) => {
               type="text"
               rows="2"
               id="author"
-              ref={authorInputRef}
               onChange={onChangeHandler}
             ></textarea>
           </div>
@@ -332,7 +299,6 @@ const BookForm = (props) => {
               name="enteredText"
               id="text"
               type="text"
-              ref={textInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -342,7 +308,6 @@ const BookForm = (props) => {
               name="enteredPrice"
               type="number"
               id="price"
-              ref={priceInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -356,7 +321,6 @@ const BookForm = (props) => {
               max="5"
               min="0"
               step="0.1"
-              ref={ratingInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -366,7 +330,6 @@ const BookForm = (props) => {
               name="enteredSeller"
               type="text"
               id="seller"
-              ref={sellerInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -379,7 +342,6 @@ const BookForm = (props) => {
               maxLength="10"
               title="Please enter a valid phone number!"
               pattern="[1-9]{1}[0-9]{9}"
-              ref={phoneNumberInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -390,7 +352,6 @@ const BookForm = (props) => {
               type="email"
               id="email"
               title="Please enter a valid e-mail Address"
-              ref={emailInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -400,7 +361,6 @@ const BookForm = (props) => {
               name="enteredDate"
               type="date"
               id="date"
-              ref={dateInputRef}
               onChange={onChangeHandler}
             />
           </div>
@@ -411,8 +371,9 @@ const BookForm = (props) => {
               type="file"
               accept="image/*"
               id="image"
-              ref={imageInputRef}
-              onChange={onChangeHandler}
+              onChange={(event) => {
+                setImageUpload(event.target.files[0]);
+              }}
               // onChange={() => setFiles(imageInputRef.current.files[0])}
             />
           </div>

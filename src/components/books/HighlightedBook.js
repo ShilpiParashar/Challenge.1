@@ -9,7 +9,7 @@ const HighlightedBook = (props) => {
         <li className={classes.item}>
           <section className={classes["hero-section"]}>
             <div className={classes.textbox}>
-              <p className="centered">{props.author} </p>
+              <p className={classes.centered}>{props.author} </p>
               <figcaption>"{props.text}"</figcaption>
               <div>
                 <ul>
@@ -57,7 +57,11 @@ const HighlightedBook = (props) => {
               </div>
             </div>
             <div className={classes["img-box"]}>
-              <img src={bookImage} className={classes.img} alt="book pic" />
+              <img
+                src={props.image ? props.image : bookImage}
+                className={classes.img}
+                alt="book pic"
+              />
               {/* {props.image} */}
             </div>
           </section>

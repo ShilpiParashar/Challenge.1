@@ -1,4 +1,4 @@
-const FIREBASE_DOMAIN = "https://olxhope-default-rtdb.firebaseio.com";
+const FIREBASE_DOMAIN = "https://booksbud-3fc30-default-rtdb.firebaseio.com";
 
 export async function getAllBooks() {
   const response = await fetch(`${FIREBASE_DOMAIN}/books.json`);

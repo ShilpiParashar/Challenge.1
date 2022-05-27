@@ -3,14 +3,19 @@ import classes from "./BookItem.module.css";
 import bookImage from "../../assests/front.jpeg";
 
 const BookItem = (props) => {
+  console.log("props.image", props.image);
   return (
     <li className={classes.item}>
-      {/* <p className="centered">{props.author}</p> */}
+      {/* <p className={classes.centered}>{props.author}</p> */}
 
       <div className={classes.main}>
         <p>{props.author}</p>
         <div className={classes["img-box"]}>
-          <img src={bookImage} className={classes.img} alt="book pic" />
+          <img
+            src={props.image ? props.image : bookImage}
+            className={classes.img}
+            alt="book pic"
+          />
           {/* {props.image} */}
         </div>
       </div>
@@ -38,7 +43,7 @@ const BookItem = (props) => {
           </li>
         </ul>
         <div className={classes.actions}>
-          <Link className="btn" to={`/books/${props.id}`}>
+          <Link className={classes.btn} to={`/books/${props.id}`}>
             View
           </Link>
         </div>

@@ -1,17 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import BookList from "../components/books/BookList";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import NoBooksFound from "../components/books/NoBooksFound";
 import useHttp from "../hooks/use-http";
 import { getAllBooks } from "../lib/api";
-
 const AllBooks = () => {
   const {
     sendRequest,
     status,
     data: loadedBooks,
-    error,
+    error
   } = useHttp(getAllBooks, true);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ const AllBooks = () => {
   if (error) {
     return <p className="centered focused">{error}</p>;
   }
-
+  console.log("loadedBooks", loadedBooks);
   if (status === "completed" && (!loadedBooks || loadedBooks.length === 0)) {
     return <NoBooksFound />;
   }
