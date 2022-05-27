@@ -1,0 +1,80 @@
+.header {
+  width: 100%;
+  height: 3.5rem;
+  display: flex;
+  padding: 0 5%;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to top left, #9be15d, #39b385);
+}
+.logo ion-icon {
+  color: #fff;
+  height: 2rem;
+  width: 2rem;
+
+  /* margin-right: 1.2rem; */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #030f1a;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav li {
+  margin-left: 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.lastchild {
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  background-color: #fff;
+  padding: 0.4rem 1.5rem;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.2);
+  color: #32506c;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.lastchild a:hover,
+.lastchild a:active,
+.lastchild a.active {
+  color: #66c873;
+}
+
+.otherchild a {
+  color: #030f1a;
+}
+
+.otherchild a:hover,
+.otherchild a:active,
+.otherchild a.active {
+  color: #fff;
+}
+
+.logo a:hover,
+.logo a:active,
+.logo a.active {
+  color: #fff;
+}

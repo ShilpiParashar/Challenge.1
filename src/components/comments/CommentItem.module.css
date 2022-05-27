@@ -1,0 +1,11 @@
+.small {
+  font-style: italic;
+  font-size: 1rem;
+  text-align: center;
+  color: #32506c;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 0.3rem;
+  border-bottom: 0.07rem solid #66c873;
+}
